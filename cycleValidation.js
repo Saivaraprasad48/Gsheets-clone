@@ -1,35 +1,28 @@
-// Storage -> 2D array (Basic needed)
-let collectedGraphComponent = [];
-let graphComponentMatrix = [];
+// Storage for graph components and matrix
+let collectedGraphComponent = []; // Stores graph components
+let graphComponentMatrix = []; // Stores the matrix representing the graph
 
-// for (let i = 0; i < rows; i++) {
-//     let row = [];
-//     for (let j = 0; j < cols; j++) {
-//         // Why array -> More than 1 child relation(dependency)
-//         row.push([]);
-//     }
-//     graphComponentMatrix.push(row);
-// }
-
-// True -> cyclic, False -> Not cyclic
+// Function to check if the graph has cycles (True for cyclic, False for acyclic)
 function isGraphCylic(graphComponentMatrix) {
-  // Dependency -> visited, dfsVisited (2D array)
-  let visited = []; // Node visit trace
-  let dfsVisited = []; // Stack visit trace
+  let visited = []; // Keeps track of visited nodes
+  let dfsVisited = []; // Keeps track of nodes in the current traversal path
 
+  // Initializing the visited and dfsVisited arrays
   for (let i = 0; i < rows; i++) {
     let visitedRow = [];
     let dfsVisitedRow = [];
     for (let j = 0; j < cols; j++) {
-      visitedRow.push(false);
-      dfsVisitedRow.push(false);
+      visitedRow.push(false); // Initially, no nodes are visited
+      dfsVisitedRow.push(false); // Initially, no nodes are in the current traversal path
     }
-    visited.push(visitedRow);
-    dfsVisited.push(dfsVisitedRow);
+    visited.push(visitedRow); // Pushing the row into the visited array
+    dfsVisited.push(dfsVisitedRow); // Pushing the row into the dfsVisited array
   }
 
+  // Traversing through the graph matrix
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
+      // If the node hasn't been visited, perform a depth-first search (DFS)
       if (visited[i][j] === false) {
         let response = dfsCycleDetection(
           graphComponentMatrix,
@@ -38,21 +31,16 @@ function isGraphCylic(graphComponentMatrix) {
           visited,
           dfsVisited
         );
-        // Found cycle so return immediately, no need to explore more path
+        // If a cycle is found, return the coordinates where it starts
         if (response == true) return [i, j];
       }
     }
   }
 
-  return null;
+  return null; // If no cycle is found, return null
 }
 
-// Start -> vis(TRUE) dfsVis(TRUE)
-// End -> dfsVis(FALSE)
-// If vis[i][j] -> already explored path, so go back no use to explore again
-// Cycle detection condition -> if (vis[i][j] == true && dfsVis[i][j] == true) -> cycle
-// Return -> True/False
-// True -> cyclic, False -> Not cyclic
+// Function to perform DFS for cycle detection
 function dfsCycleDetection(
   graphComponentMatrix,
   srcr,
@@ -60,16 +48,17 @@ function dfsCycleDetection(
   visited,
   dfsVisited
 ) {
-  visited[srcr][srcc] = true;
-  dfsVisited[srcr][srcc] = true;
+  visited[srcr][srcc] = true; // Marking the node as visited
+  dfsVisited[srcr][srcc] = true; // Marking the node in the current traversal path
 
-  // A1 -> [ [0, 1], [1, 0], [5, 10], .....  ]
+  // Looping through the adjacent nodes
   for (
     let children = 0;
     children < graphComponentMatrix[srcr][srcc].length;
     children++
   ) {
-    let [nbrr, nbrc] = graphComponentMatrix[srcr][srcc][children];
+    let [nbrr, nbrc] = graphComponentMatrix[srcr][srcc][children]; // Getting neighboring node coordinates
+    // If the neighboring node hasn't been visited, perform DFS on it
     if (visited[nbrr][nbrc] === false) {
       let response = dfsCycleDetection(
         graphComponentMatrix,
@@ -78,16 +67,15 @@ function dfsCycleDetection(
         visited,
         dfsVisited
       );
-      if (response === true) return true; // Found cycle so return immediately, no need to explore more path
+      if (response === true) return true; // If a cycle is found, stop further exploration
     } else if (
       visited[nbrr][nbrc] === true &&
       dfsVisited[nbrr][nbrc] === true
     ) {
-      // Found cycle so return immediately, no need to explore more path
-      return true;
+      return true; // If a cycle is detected in the current traversal path, return true
     }
   }
 
-  dfsVisited[srcr][srcc] = false;
-  return false;
+  dfsVisited[srcr][srcc] = false; // Resetting node in the current traversal path
+  return false; // Return false if no cycle is found
 }

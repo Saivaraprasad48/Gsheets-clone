@@ -1,83 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta tags -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Linking to external style sheets -->
     <link rel="stylesheet" href="./style.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
+    <!-- Title of the web application -->
     <title>Excel - Sai Vara Prasad</title>
   </head>
-
   <body>
-    <!-- application start from here -->
-    <!-- Top Navbar -->
+    <!-- Application interface starts here -->
+
+    <!-- Top Navbar section -->
     <div class="page-actions-cont">
+      <!-- Different page actions -->
       <div class="page-action">Home</div>
       <div class="page-action selected-page-action">File</div>
       <div class="page-action">Insert</div>
       <div class="page-action">Layout</div>
       <div class="page-action">Help</div>
     </div>
-    <!-- Middle Navbar -->
+
+    <!-- Middle Navbar section -->
     <div class="cellprop-actions-cont">
+      <!-- Various cell properties/actions -->
       <span class="material-icons copy"> content_copy </span>
       <span class="material-icons cut"> content_cut </span>
       <span class="material-icons paste"> content_paste </span>
       <select class="font-family-prop">
+        <!-- Dropdown for selecting font family -->
         <option value="monospace">Monospace</option>
         <option value="sans-serif">Sans-Serif</option>
         <option value="fantasy">Fantasy</option>
         <option value="cursive">Cursive</option>
       </select>
       <select class="font-size-prop">
+        <!-- Dropdown for selecting font size -->
         <option value="14">14</option>
         <option value="16">16</option>
         <option value="18">18</option>
         <option value="20">20</option>
       </select>
+      <!-- Icons for text formatting -->
       <span class="material-icons bold"> format_bold </span>
       <span class="material-icons italic"> format_italic </span>
       <span class="material-icons underline"> format_underlined </span>
+      <!-- Alignment icons -->
       <span class="left material-icons alignment"> format_align_left </span>
       <span class="center material-icons alignment"> format_align_center </span>
       <span class="right material-icons alignment"> format_align_right </span>
+      <!-- Color picker for text -->
       <div class="color-prop">
         <span class="material-icons"> format_color_text </span>
         <input type="color" class="font-color-prop" />
       </div>
+      <!-- Color picker for background -->
       <div class="color-prop">
         <span class="material-icons"> format_color_fill </span>
         <input type="color" class="BGcolor-prop" />
       </div>
+      <!-- Icons for download/upload -->
       <span class="material-icons download"> cloud_download </span>
       <span class="material-icons open"> cloud_upload </span>
     </div>
+
+    <!-- Formula bar section -->
     <div class="formula-actions-cont">
+      <!-- Input field showing cell address -->
       <input type="text" readonly class="address-bar" />
+      <!-- Icon for opening formula bar -->
       <img
         class="formula-icon"
         src="https://img.icons8.com/ios/50/000000/formula-fx.png"
       />
+      <!-- Input field for formulas -->
       <input type="text" class="formula-bar" />
     </div>
+
+    <!-- Grid section -->
     <div class="grid-cont">
+      <!-- Dummy box for the top-left corner -->
       <div class="top-left-dummy-box"></div>
+      <!-- Container for column addresses -->
       <div class="address-col-cont"></div>
+      <!-- Container for all cells -->
       <div class="cells-cont">
+        <!-- Container for row addresses -->
         <div class="address-row-cont"></div>
       </div>
     </div>
+
+    <!-- Sheet actions section -->
     <div class="sheet-actions-cont">
+      <!-- Icon for adding a new sheet -->
       <div class="sheet-add-icon">
         <span class="material-icons"> post_add </span>
       </div>
+      <!-- Container for sheets/folders -->
       <div class="sheets-folder-cont"></div>
     </div>
 
+    <!-- Scripts -->
+    <!-- JavaScript files for functionality -->
     <script src="./grid.js"></script>
     <script src="./cyclicPathTrace.js"></script>
     <script src="./cycleValidation.js"></script>
